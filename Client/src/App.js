@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import AddComponent from './Components/AddComponent.js.js'
-import { TaskList } from './TaskList.js.js'
+import AddComponent from './Components/AddComponent.js'
+import { TaskList } from './TaskList.js'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

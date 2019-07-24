@@ -12,11 +12,7 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "dev": "nodemon main-server-file.js",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "nodemon main-server-file.js"
   },
   "eslintConfig": {
     "extends": "react-app"
