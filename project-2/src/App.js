@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import AddComponent from './Components/AddComponent.js'
 import { TaskList } from './TaskList.js'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios');
 const path = "http://localhost:1234/todos";
@@ -14,14 +16,25 @@ class App extends React.Component {
     }
   }
 
+  notify(err) {
+    toast.error(`${err}`, {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true
+    });
+  }
+
   componentDidMount() {
     axios.get(`${path}`)
       .then(res => {
         const data = res.data;
         this.setState({ todoes: data });
       })
-      .catch((err) => {
-        console.log("SORRY: ", err);
+      .catch(err => {
+        this.notify(err);
       })
   }
 
@@ -38,14 +51,13 @@ class App extends React.Component {
             const data = res.data;
             this.setState({ todoes: data });
           })
-          .catch((err) => {
-            console.log("SORRY: ", err);
+          .catch(err => {
+            this.notify(err);
           })
       })
-      .catch(function (err) {
-        console.log("WASN'T WRITTEN, BECAUSE: \n", err)
+      .catch(err => {
+        this.notify(err);
       })
-    this.componentDidMount();
   }
 
   checkTasks() {
@@ -77,8 +89,8 @@ class App extends React.Component {
             return { status: todoes };
           });
         })
-        .catch(function (err) {
-          console.log("WASN'T UPDATED ALL, BECAUSE: \n", err)
+        .catch(err => {
+          this.notify(err);
         })
     }
   }
@@ -102,8 +114,9 @@ class App extends React.Component {
           return { status: todoes };
         });
       })
-      .catch(function (err) {
+      .catch(err => {
         console.log("WASN'T CHECKED, BECAUSE: \n", err)
+        this.notify(err);
       })
   }
 
@@ -116,7 +129,7 @@ class App extends React.Component {
         });
       })
       .catch(err => {
-        console.log('err in del', err);
+        this.notify(err);
       })
   }
 
@@ -146,7 +159,7 @@ class App extends React.Component {
         });
       })
       .catch(err => {
-        console.log('error in changeText', err);
+        this.notify(err);
       })
   }
 
@@ -154,7 +167,6 @@ class App extends React.Component {
     if (arrayOfCompleted.length !== 0) {
 
       let clearedFromComleted = this.state.todoes.filter(e => e._id !== arrayOfCompleted[0]._id);
-      console.log('arrayOfCompleted >>', arrayOfCompleted);
       axios.delete(`${path}/${arrayOfCompleted[0]._id}/delete`)
         .then(() => {
           this.setState({
@@ -162,7 +174,7 @@ class App extends React.Component {
           });
         })
         .catch(err => {
-          console.log(`[0] error:\n`, err);
+          this.notify(err);
         })
       for (let i = 1; i < arrayOfCompleted.length; i++) {
         clearedFromComleted = clearedFromComleted.filter(e => e._id !== arrayOfCompleted[i]._id);
@@ -173,7 +185,7 @@ class App extends React.Component {
             });
           })
           .catch(err => {
-            console.log(`[${i}] error:\n`, err);
+            this.notify(err);
           })
       }
     } else {
@@ -184,6 +196,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App container" id="app">
+        <ToastContainer />
         <header className="App-header text-center">todos</header>
         <div className="taskBody shadow">
           <AddComponent
