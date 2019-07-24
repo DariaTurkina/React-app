@@ -1,0 +1,111 @@
+.Todo{
+    display: flex;
+    color: rgb(92,79,70);
+    border-bottom: 1px solid rgb(230,230,230);
+    line-height: 150%;
+    font-size: 110%;
+}
+.todoBox{
+    display: flex;
+    margin: 0 5px;
+    width: 100%;
+    justify-content: space-between;
+}
+.visibleInput{
+    display: flex;
+}
+.invisibleInput{
+    display: none;
+}
+.isChecked{
+    text-decoration: line-through;
+    outline: none;
+    border: none;
+}
+
+/*input[type=checkbox] {
+    position: relative;
+    appearance: none;
+    font-size: inherit;
+    width: 1em;
+    margin: 0;
+    color: inherit;
+    outline: none;
+    font-family: 'Font Awesome 5 Pro';
+    transition: 300ms ease-out;
+}
+
+input[type=checkbox]::after {
+  content: '\f111';
+  display: inline-block;
+  text-align: center;
+  width: 1em;
+}
+
+input[type=checkbox] :checked::after {
+  font-weight: 900;
+}
+input[type=checkbox] :active {
+  transform: scale(.6);
+}
+input[type=checkbox]:checked::after {
+    content: '\f058';
+}*/
+.checkbox{
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    outline: none;
+    margin: auto;
+    color: rgb(126,179,169);
+}
+.checkbox:active, .checkbox:focus{
+    outline: none;
+}
+
+.checkDiv{
+    width: 5%;
+    display: flex;
+    vertical-align: baseline;
+}
+.taskName{
+    display: flex;
+    margin-left: 10px;
+    flex-basis: 95%;
+}
+.pClass{
+    text-align: left;
+}
+.inps{
+    border: none;
+    outline: none;
+}
+.inps:focus, .inps:active{
+    outline: none;
+    border: none;
+}
+.delete{
+    display: flex;
+    flex-basis: 5%;
+}
+.closeXbut{
+    color: rgb(112, 59, 59);
+    font-size: 150%;
+    outline: none;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+
+}
+.closeX:hover{
+    color: rgb(78, 48, 48);
+
+}
+.invisibleButX{
+    color: transparent;
+    outline: none;
+    font-size: 150%;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}

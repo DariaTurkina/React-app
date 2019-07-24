@@ -1,0 +1,49 @@
+.AddComponent{
+    display: flex;
+    justify-content: flex-start;
+}
+.borderUnder{
+    border-bottom: 1px solid rgb(230,230,230);
+}
+.inp{
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(92,79,70);
+    margin-right: 5px;
+}
+.inp:focus, .inp:active, .checkAll:active, .checkAll:focus{
+    outline: none;
+    border: none;
+}
+.checkAll{
+    font-size: 200%;
+    width: 20px;
+    color: rgb(229,229,229);
+    margin-left: 5px;
+    transform: rotate(90deg);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    max-width: 20px;
+}
+.checkAll:hover{ 
+    color: rgb(119,118,119);
+}
+.inp::-webkit-input-placeholder{
+    font-style: italic;
+}
+.invisibleButAdd{
+    color: transparent;
+    font-size: 200%;
+    width: 20px;
+    margin-left: 5px;
+    transform: rotate(90deg);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    max-width: 20px;
+    pointer-events: none;
+}

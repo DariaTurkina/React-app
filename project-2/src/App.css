@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+  background-color: rgb(245,245,245);
+  min-height: 100vh;
+  min-width: 25vw;
+  width: 40vw;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App-header {
+  font-size: 400%;
+  color: rgb(234,216,216);
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.taskBody{
+  background-color: rgb(254,254,254);
+  width: 90%;
+  margin: auto;
+  border: 1px solid rgb(230,230,230);
+}
