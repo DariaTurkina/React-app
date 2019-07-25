@@ -2,17 +2,20 @@ import React from 'react';
 import './App.css';
 import AddComponent from './Components/AddComponent.js'
 import { TaskList } from './TaskList.js'
+import Authorization from './Components/Authorization.js'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios');
-const path = "http://localhost:1234/todos";
+const path = "http://localhost:1234/tasks";
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      todoes: []
+      todoes: [],
+      userID: "5d398e5d44a94d9aac4ead9a",
+      stateApp: "TaskList"
     }
   }
 
@@ -42,7 +45,8 @@ class App extends React.Component {
 
     let newTask = {
       name: nameValue,
-      status: false
+      status: false,
+      userID: this.state.userID
     }
     axios.post(`${path}/create`, newTask)
       .then(() => {
@@ -145,7 +149,14 @@ class App extends React.Component {
   }
 
   changeTaskName(name, id) {
-    axios.put(`${path}/${id}/update`, name)
+    let thisTodo = this.state.todoes.filter(e => e._id === id);
+    let updateData = {
+      name: name,
+      status: thisTodo.status,
+      _id: thisTodo._id,
+      _v: 0
+    }
+    axios.put(`${path}/${id}/update`, updateData)
       .then(() => {
         this.setState(state => {
           const updated = state.todoes.map(e => {
@@ -197,21 +208,26 @@ class App extends React.Component {
       <div className="App container" id="app">
         <ToastContainer />
         <header className="App-header text-center">todos</header>
-        <div className="taskBody shadow">
-          <AddComponent
-            addTodo={(e) => this.addTodo(e)}
-            checkTasks={() => this.checkTasks()}
-            array={this.state.todoes}
-          />
-          <TaskList
-            array={this.state.todoes}
-            checkTask={(id, bool) => this.checkTask(id, bool)}
-            changeTaskName={(name, id) => this.changeTaskName(name, id)}
-            changeText={(name, id) => this.changeText(name, id)}
-            deleteTask={(id) => this.deleteTask(id)}
-            removeAllCompleted={(arrayOfCompleted) => this.removeAllCompleted(arrayOfCompleted)}
-          />
-        </div>
+        {this.state.stateApp === "Authorization" &&
+          <Authorization/>
+        }
+        {this.state.stateApp === "TaskList" &&
+          <div className="taskBody shadow">
+            <AddComponent
+              addTodo={(e) => this.addTodo(e)}
+              checkTasks={() => this.checkTasks()}
+              array={this.state.todoes}
+            />
+            <TaskList
+              array={this.state.todoes}
+              checkTask={(id, bool) => this.checkTask(id, bool)}
+              changeTaskName={(name, id) => this.changeTaskName(name, id)}
+              changeText={(name, id) => this.changeText(name, id)}
+              deleteTask={(id) => this.deleteTask(id)}
+              removeAllCompleted={(arrayOfCompleted) => this.removeAllCompleted(arrayOfCompleted)}
+            />
+          </div>
+        }
       </div>
     );
   }

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const todo = require('./routes/task.route');
+const todo = require('./routes/product.route');
 const app = express();
 
 app.use(function (req, res, next) {
@@ -11,7 +11,7 @@ app.use(function (req, res, next) {
 });
 
 const mongoose = require('mongoose');
-let dev_db_url = 'mongodb://127.0.0.1:27017/todoes';//?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&3t.uriVersion=3&3t.connection.name=localDB';
+let dev_db_url = 'mongodb://localhost:27017/todoes';//?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&3t.uriVersion=3&3t.connection.name=localDB';
 //let mongoDB = dev_db_url;
 mongoose.connect(dev_db_url);
 mongoose.Promise = global.Promise;

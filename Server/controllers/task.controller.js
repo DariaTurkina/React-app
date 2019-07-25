@@ -1,4 +1,4 @@
-const Todo = require('../models/product.model');
+const Todo = require('../models/task.model');
 
 exports.product_create = function (req, res) {
     let todo = new Todo(
