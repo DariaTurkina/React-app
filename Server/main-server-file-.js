@@ -11,8 +11,7 @@ app.use(function (req, res, next) {
 });
 
 const mongoose = require('mongoose');
-let dev_db_url = 'mongodb://localhost:27017/todoes';//?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&3t.uriVersion=3&3t.connection.name=localDB';
-//let mongoDB = dev_db_url;
+let dev_db_url = 'mongodb://localhost:27017/todoes';
 mongoose.connect(dev_db_url);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;

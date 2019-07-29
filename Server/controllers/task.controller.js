@@ -25,6 +25,13 @@ exports.todoes = function (req, res, next) {
         res.send(todo);
     })
 };
+exports.user_tasks = function (req, res) {
+    const { userID } = req.query;
+    Todo.find({ userID: userID }, function (err, tasks) {
+        if (err) res.send({ message: "Error", err });
+        res.send(tasks);
+    })
+};
 exports.product_details = function (req, res, next) {
     Todo.findById(req.params.id, function (err, todo) {
         if (err) {
