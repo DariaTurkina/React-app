@@ -21,7 +21,7 @@ exports.todoes = function (req, res) {
         res.send(todo);
     })
 };
-exports.user_tasks = function (req, res) {
+exports.todo_tasks = function (req, res) {
     const { userID } = req.query;
     Todo.find({ userID: userID }, function (err, tasks) {
         if (err) res.send({ message: "Error", err });
