@@ -12,7 +12,7 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "dev": "nodemon main-server-file.js"
+    "dev": "nodemon app.js"
   },
   "eslintConfig": {
     "extends": "react-app"
