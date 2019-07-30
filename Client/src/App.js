@@ -52,7 +52,6 @@ class App extends React.Component {
   }
 
   addTodo(nameValue) {
-
     let newTask = {
       name: nameValue,
       status: false,
@@ -60,9 +59,9 @@ class App extends React.Component {
     }
     axios.post(`${path}/create`, newTask)
       .then(() => {
-        axios.get(`${path}`)
+        axios.get(`${path}/currentUser`, { params: { userID: this.state.userID } })
           .then(res => {
-            const data = res.data;
+            const { data } = res;
             this.setState({ todoes: data });
           })
           .catch(err => {
@@ -83,7 +82,6 @@ class App extends React.Component {
         break;
       }
     }
-
     if (count === 0) {
       bool = false;
     }
@@ -185,7 +183,6 @@ class App extends React.Component {
 
   removeAllCompleted(arrayOfCompleted) {
     if (arrayOfCompleted.length !== 0) {
-
       let clearedFromComleted = this.state.todoes.filter(e => e._id !== arrayOfCompleted[0]._id);
       axios.delete(`${path}/${arrayOfCompleted[0]._id}/delete`)
         .then(() => {

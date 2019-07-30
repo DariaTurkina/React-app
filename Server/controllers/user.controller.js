@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 
-exports.product_create = (req, res) => {
+exports.user_create = (req, res) => {
     const { email, pwd } = req.body;
     User.find({ email: email }, function (err, isUserEmail) {
         if (isUserEmail.length === 0) {
@@ -14,7 +14,7 @@ exports.product_create = (req, res) => {
         }
     });
 };
-exports.product_details = function (req, res) {
+exports.user_details = function (req, res) {
     const { email, pwd } = req.query;
     User.find({ email: email, pwd: pwd }, function (err, user) {
         if (err) res.send({ message: "Error", err });
@@ -22,7 +22,7 @@ exports.product_details = function (req, res) {
         res.send(user[0]);
     })
 };
-exports.product_delete = function (req, res) {
+exports.user_delete = function (req, res) {
     User.findByIdAndRemove(req.params.id, function (err) {
         if (err) res.send({ message: "Error", err });
         res.send('Deleted successfully!');
