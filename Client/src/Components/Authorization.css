@@ -1,0 +1,42 @@
+.Authorization{
+    text-align: center;
+    color: rgb(121,117,114);
+}
+.Authorization-header{
+    font-size: 150%;
+}
+.div-inp{
+    display: flex;
+    width: 85%;
+    margin: 0 auto 10px auto;
+    line-height: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.offerToReg{
+    margin: 30px auto 10px auto;
+}
+.button-auth{
+    background-color: transparent;
+    border: none;
+    border: 1px solid rgb(121,117,114);
+    border-radius: 5px;
+}
+.button-auth:hover{
+    text-decoration: rgb(121,117,114);
+}
+.reg-buts{
+    margin: 0 auto;
+    display: flex;
+}
+.invis{
+    display: none;
+    visibility: hidden;
+}
+.one{
+    justify-content: center;
+    margin: auto;
+}
+.two{
+    justify-content: space-between;
+}
