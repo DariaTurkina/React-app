@@ -7,21 +7,21 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios');
-const path = "http://localhost:1234/tasks";
+const path = "http://localhost:1234/todos";
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
       todoes: [],
-      userID: "5d398e5d44a94d9aac4ead9a",
-      stateApp: "TaskList"
+      userID: "",
+      stateApp: "Authorization"
     }
   }
 
   notify(err) {
     toast.error(`${err}`, {
-      position: "top-center",
+      position: "top-left",
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: false,
@@ -30,19 +30,28 @@ class App extends React.Component {
     });
   }
 
-  componentDidMount() {
-    axios.get(`${path}`)
+  changeStateApp(currentUser) {
+    axios.get(`${path}/currentUser`, { params: { userID: currentUser } })
       .then(res => {
-        const data = res.data;
-        this.setState({ todoes: data });
+        const { data } = res;
+        this.setState({
+          todoes: data,
+          stateApp: "TaskList",
+          userID: currentUser
+        });
       })
       .catch(err => {
         this.notify(err);
       })
   }
 
-  addTodo(nameValue) {
+  logOutFromTodos() {
+    this.setState({
+      stateApp: "Authorization"
+    });
+  }
 
+  addTodo(nameValue) {
     let newTask = {
       name: nameValue,
       status: false,
@@ -50,9 +59,9 @@ class App extends React.Component {
     }
     axios.post(`${path}/create`, newTask)
       .then(() => {
-        axios.get(`${path}`)
+        axios.get(`${path}/currentUser`, { params: { userID: this.state.userID } })
           .then(res => {
-            const data = res.data;
+            const { data } = res;
             this.setState({ todoes: data });
           })
           .catch(err => {
@@ -73,7 +82,6 @@ class App extends React.Component {
         break;
       }
     }
-
     if (count === 0) {
       bool = false;
     }
@@ -175,7 +183,6 @@ class App extends React.Component {
 
   removeAllCompleted(arrayOfCompleted) {
     if (arrayOfCompleted.length !== 0) {
-
       let clearedFromComleted = this.state.todoes.filter(e => e._id !== arrayOfCompleted[0]._id);
       axios.delete(`${path}/${arrayOfCompleted[0]._id}/delete`)
         .then(() => {
@@ -207,9 +214,21 @@ class App extends React.Component {
     return (
       <div className="App container" id="app">
         <ToastContainer />
+        {this.state.stateApp === "TaskList" &&
+          <div className="log-out btn-link">
+            <input
+              type="submit"
+              className="log-out-but"
+              value="Log out"
+              onClick={() => this.logOutFromTodos()}
+            />
+          </div>
+        }
         <header className="App-header text-center">todos</header>
         {this.state.stateApp === "Authorization" &&
-          <Authorization/>
+          <Authorization
+            changeStateApp={(currentUser) => this.changeStateApp(currentUser)}
+          />
         }
         {this.state.stateApp === "TaskList" &&
           <div className="taskBody shadow">

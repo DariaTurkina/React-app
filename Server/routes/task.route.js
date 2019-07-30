@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const product_controller = require('../controllers/task.controller');
+const todo_controller = require('../controllers/task.controller');
 
-router.get('/', product_controller.todoes);
-router.post('/create', product_controller.product_create);
-router.get('/:id', product_controller.product_details);
-router.put('/:id/update', product_controller.product_update);
-router.delete('/:id/delete', product_controller.product_delete);
+router.get('/', todo_controller.todoes);
+router.get('/currentUser', todo_controller.user_tasks);
+router.post('/create', todo_controller.todo_create);
+router.get('/:id', todo_controller.todo_details);
+router.put('/:id/update', todo_controller.todo_update);
+router.delete('/:id/delete', todo_controller.todo_delete);
 module.exports = router;
